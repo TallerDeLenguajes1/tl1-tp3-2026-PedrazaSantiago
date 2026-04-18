@@ -2,8 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-void mostrarPersonas(char *nombres[]);
+void MostrarPersonas(char *nombres[]);
+void BuscarNombrePorId(int id,char *nombres[]);
+int BuscarNombrePorPalabra(char *palabra,char *nombres[]);
 int main(){
+    char palabra[20];
+    int id;
     char *nombres[5];
     char buff[120];
     for(int i=0;i<5;i++){
@@ -13,16 +17,44 @@ int main(){
         nombres[i] = (char *) malloc (sizeof(char) * cantLetras + 1);  
         strcpy(nombres[i], buff); 
     }
-    mostrarPersonas(nombres);
+    MostrarPersonas(nombres);
+    printf("Escriba la posicion a buscar:\n");
+    scanf("%d", &id);
+    BuscarNombrePorId(id,nombres);
+    printf("Escriba la palabra a buscar:\n");
+    fflush(stdin);
+    gets(palabra);
+    int indice = BuscarNombrePorPalabra(palabra,nombres);
+    if(indice !=-1){
+        printf("%s",nombres[indice]);
+    }else{
+        printf("Palabra no encontrada");
+    }
     for(int i=0;i<5;i++){
         free(nombres[i]);
     }
-
     return 0;
 }
 
-void mostrarPersonas(char *nombres[]){
+void MostrarPersonas(char *nombres[]){
     for(int i=0;i<5;i++){
         printf("%s\n",nombres[i]);
     }
+}
+void BuscarNombrePorId(int id, char *nombres[]){
+    if(id<0 || id>=5){
+        printf("No se encontro el valor buscado");
+    }{
+        printf("%s\n", nombres[id]);
+    }
+}
+
+int BuscarNombrePorPalabra(char *palabra,char *nombres[]){
+    char resultado[20];
+    for(int i=0;i<5;i++){
+        if(strstr(nombres[i], palabra)!=NULL){
+            return i;
+        }
+    }
+    return -1;
 }
