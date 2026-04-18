@@ -6,6 +6,7 @@ void MostrarPersonas(char *nombres[]);
 void BuscarNombrePorId(int id,char *nombres[]);
 int BuscarNombrePorPalabra(char *palabra,char *nombres[]);
 int main(){
+    int opcion;
     char palabra[20];
     int id;
     char *nombres[5];
@@ -18,17 +19,28 @@ int main(){
         strcpy(nombres[i], buff); 
     }
     MostrarPersonas(nombres);
-    printf("Escriba la posicion a buscar:\n");
-    scanf("%d", &id);
-    BuscarNombrePorId(id,nombres);
-    printf("Escriba la palabra a buscar:\n");
-    fflush(stdin);
-    gets(palabra);
-    int indice = BuscarNombrePorPalabra(palabra,nombres);
-    if(indice !=-1){
-        printf("%s",nombres[indice]);
-    }else{
-        printf("Palabra no encontrada");
+    printf("Elija una opcion:\n");
+    scanf("%d",&opcion);
+    switch (opcion)
+    {
+    case 1:
+        printf("Escriba la posicion a buscar:\n");
+        scanf("%d", &id);
+        BuscarNombrePorId(id,nombres);
+        break;
+    case 2:
+        printf("Escriba la palabra a buscar:\n");
+        fflush(stdin);
+        gets(palabra);
+        int indice = BuscarNombrePorPalabra(palabra,nombres);
+        if(indice !=-1){
+            printf("%s",nombres[indice]);
+        }else{
+            printf("Palabra no encontrada");
+        }
+        break;
+    default:
+        break;
     }
     for(int i=0;i<5;i++){
         free(nombres[i]);
@@ -58,3 +70,6 @@ int BuscarNombrePorPalabra(char *palabra,char *nombres[]){
     }
     return -1;
 }
+
+
+
