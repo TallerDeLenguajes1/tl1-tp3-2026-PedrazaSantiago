@@ -22,8 +22,12 @@ struct Producto *Productos; //El tamaño de este arreglo depende de la variable
 void MostrarClientes(struct Cliente *clientes, int n);
 int costo(struct Producto Productos);
 int main(){
-    int n=5;
+    int n;
     char buff[100];
+    do{
+    printf("Ingrese la cantidad de clientes:\n");
+    scanf("%d",&n);
+    }while(n<1||n>5);
     struct Cliente *clientes = (struct Cliente*) malloc(sizeof(struct Cliente)*n);
     for(int i=0;i<n;i++){
         clientes[i].ClienteID = i+1;
